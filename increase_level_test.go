@@ -24,9 +24,9 @@ import (
 	"bytes"
 	"testing"
 
+	"github.com/TRON-US/zap/zapcore"
+	"github.com/TRON-US/zap/zaptest/observer"
 	"github.com/stretchr/testify/assert"
-	"go.uber.org/zap/zapcore"
-	"go.uber.org/zap/zaptest/observer"
 )
 
 func newLoggedEntry(level zapcore.Level, msg string) observer.LoggedEntry {

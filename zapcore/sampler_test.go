@@ -26,10 +26,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/TRON-US/zap/internal/ztest"
+	. "github.com/TRON-US/zap/zapcore"
+	"github.com/TRON-US/zap/zaptest/observer"
 	"go.uber.org/atomic"
-	"go.uber.org/zap/internal/ztest"
-	. "go.uber.org/zap/zapcore"
-	"go.uber.org/zap/zaptest/observer"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -147,9 +147,11 @@ func (c *countingCore) Write(Entry, []Field) error {
 	return nil
 }
 
-func (c *countingCore) With([]Field) Core { return c }
-func (*countingCore) Enabled(Level) bool  { return true }
-func (*countingCore) Sync() error         { return nil }
+func (c *countingCore) With([]Field) Core                 { return c }
+func (*countingCore) Enabled(Level) bool                  { return true }
+func (*countingCore) Sync() error                         { return nil }
+func (*countingCore) WriteToChannel(Entry, []Field) error { return nil }
+func (*countingCore) WithChannel() bool                   { return false }
 
 func TestSamplerConcurrent(t *testing.T) {
 	const (

@@ -25,9 +25,9 @@ import (
 	"os"
 	"testing"
 
+	"github.com/TRON-US/zap/zapcore"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.uber.org/zap/zapcore"
 )
 
 func TestConfig(t *testing.T) {

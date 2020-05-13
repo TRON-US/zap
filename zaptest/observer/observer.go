@@ -22,14 +22,14 @@
 // encoding-agnostic repesentation of log entries. It's useful for
 // applications that want to unit test their log output without tying their
 // tests to a particular output encoding.
-package observer // import "go.uber.org/zap/zaptest/observer"
+package observer // import "github.com/TRON-US/zap/zaptest/observer"
 
 import (
 	"strings"
 	"sync"
 	"time"
 
-	"go.uber.org/zap/zapcore"
+	"github.com/TRON-US/zap/zapcore"
 )
 
 // ObservedLogs is a concurrency-safe, ordered collection of observed logs.
@@ -164,4 +164,12 @@ func (co *contextObserver) Write(ent zapcore.Entry, fields []zapcore.Field) erro
 
 func (co *contextObserver) Sync() error {
 	return nil
+}
+
+func (co *contextObserver) WriteToChannel(ent zapcore.Entry, fields []zapcore.Field) error {
+	return nil
+}
+
+func (co *contextObserver) WithChannel() bool {
+	return false
 }

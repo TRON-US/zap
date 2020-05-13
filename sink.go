@@ -23,13 +23,12 @@ package zap
 import (
 	"errors"
 	"fmt"
+	"github.com/TRON-US/zap/zapcore"
 	"io"
 	"net/url"
 	"os"
 	"strings"
 	"sync"
-
-	"go.uber.org/zap/zapcore"
 )
 
 const schemeFile = "file"

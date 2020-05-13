@@ -23,10 +23,10 @@ package zap
 import (
 	"testing"
 
-	"go.uber.org/zap/internal/exit"
-	"go.uber.org/zap/internal/ztest"
-	"go.uber.org/zap/zapcore"
-	"go.uber.org/zap/zaptest/observer"
+	"github.com/TRON-US/zap/internal/exit"
+	"github.com/TRON-US/zap/internal/ztest"
+	"github.com/TRON-US/zap/zapcore"
+	"github.com/TRON-US/zap/zaptest/observer"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -72,6 +72,14 @@ func (mc multiCore) Write(ent Entry, fields []Field) error {
 	return err
 }
 
+func (mc multiCore) WriteToChannel(ent Entry, fields []Field) error {
+	return nil
+}
+
+func (mc multiCore) WithChannel() bool {
+	return false
+}
+
 func (mc multiCore) Sync() error {
 	var err error
 	for i := range mc {
