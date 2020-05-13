@@ -25,8 +25,8 @@ import (
 	"sort"
 	"time"
 
+	logclient "github.com/TRON-US/go-btfs-collect-client/logclient"
 	"github.com/TRON-US/zap/zapcore"
-	logclient "github.com/steveyeom/go-btfs-logclient/logclient"
 )
 
 // SamplingConfig sets a sampling strategy for the logger. Sampling caps the

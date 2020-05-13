@@ -3,8 +3,8 @@ module github.com/TRON-US/zap
 go 1.13
 
 require (
+	github.com/TRON-US/go-btfs-collect-client v0.0.1
 	github.com/pkg/errors v0.8.1
-	github.com/steveyeom/go-btfs-logclient v0.0.0-20200511210241-1e009aafe09d
 	github.com/stretchr/testify v1.4.0
 	go.uber.org/atomic v1.6.0
 	go.uber.org/multierr v1.5.0

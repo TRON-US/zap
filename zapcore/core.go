@@ -21,7 +21,7 @@
 package zapcore
 
 import (
-	logclient "github.com/steveyeom/go-btfs-logclient/logclient"
+	logclient "github.com/TRON-US/go-btfs-collect-client/logclient"
 )
 
 // Core is a minimal, fast logger interface. It's designed for library authors
