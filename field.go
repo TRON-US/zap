@@ -25,7 +25,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/TRON-US/zap/zapcore"
+	"go.uber.org/zap/zapcore"
 )
 
 // Field is an alias for Field. Aliasing this type dramatically

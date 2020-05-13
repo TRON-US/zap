@@ -28,9 +28,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/TRON-US/zap"
-	. "github.com/TRON-US/zap/zapcore"
 	"github.com/stretchr/testify/assert"
+	"go.uber.org/zap"
+	. "go.uber.org/zap/zapcore"
 )
 
 type users int

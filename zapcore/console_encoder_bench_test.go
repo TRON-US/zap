@@ -23,7 +23,7 @@ package zapcore_test
 import (
 	"testing"
 
-	. "github.com/TRON-US/zap/zapcore"
+	. "go.uber.org/zap/zapcore"
 )
 
 func BenchmarkZapConsole(b *testing.B) {

@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/TRON-US/zap/zapcore"
+	"go.uber.org/zap/zapcore"
 )
 
 var (

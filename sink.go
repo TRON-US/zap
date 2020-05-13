@@ -23,7 +23,7 @@ package zap
 import (
 	"errors"
 	"fmt"
-	"github.com/TRON-US/zap/zapcore"
+	"go.uber.org/zap/zapcore"
 	"io"
 	"net/url"
 	"os"

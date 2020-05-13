@@ -25,7 +25,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/TRON-US/zap/zapcore"
+	"go.uber.org/zap/zapcore"
 )
 
 // ServeHTTP is a simple JSON endpoint that can report on or change the current

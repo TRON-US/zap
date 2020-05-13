@@ -20,7 +20,7 @@
 
 package zaptest
 
-import "github.com/TRON-US/zap/internal/ztest"
+import "go.uber.org/zap/internal/ztest"
 
 type (
 	// A Syncer is a spy for the Sync portion of zapcore.WriteSyncer.

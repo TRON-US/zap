@@ -24,8 +24,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/TRON-US/zap/buffer"
-	"github.com/TRON-US/zap/internal/bufferpool"
+	"go.uber.org/zap/buffer"
+	"go.uber.org/zap/internal/bufferpool"
 )
 
 var _sliceEncoderPool = sync.Pool{

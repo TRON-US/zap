@@ -31,8 +31,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/TRON-US/zap"
-	"github.com/TRON-US/zap/zapcore"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -44,7 +44,7 @@ import (
 // which includes filenames.
 var _zapPackages = []string{
 	"github.com/TRON-US/zap.",
-	"github.com/TRON-US/zap/zapcore.",
+	"go.uber.org/zap/zapcore.",
 }
 
 func TestStacktraceFiltersZapLog(t *testing.T) {
@@ -104,7 +104,7 @@ func TestStacktraceFiltersVendorZap(t *testing.T) {
 		setupSymlink(t, curFile, filepath.Join(testDir, curFile))
 
 		// Set up symlinks for zap, and for any test dependencies.
-		setupSymlink(t, zapDir, filepath.Join(vendorDir, "github.com/TRON-US/zap"))
+		setupSymlink(t, zapDir, filepath.Join(vendorDir, "go.uber.org/zap"))
 		for _, dep := range deps {
 			setupSymlink(t, dep.Dir, filepath.Join(vendorDir, dep.ImportPath))
 		}

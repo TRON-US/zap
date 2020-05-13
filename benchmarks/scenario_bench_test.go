@@ -25,7 +25,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/TRON-US/zap"
+	"go.uber.org/zap"
 )
 
 func BenchmarkDisabledWithoutFields(b *testing.B) {

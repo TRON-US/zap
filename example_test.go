@@ -27,8 +27,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/TRON-US/zap"
-	"github.com/TRON-US/zap/zapcore"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 func Example_presets() {

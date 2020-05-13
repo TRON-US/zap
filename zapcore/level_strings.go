@@ -20,7 +20,7 @@
 
 package zapcore
 
-import "github.com/TRON-US/zap/internal/color"
+import "go.uber.org/zap/internal/color"
 
 var (
 	_levelToColor = map[Level]color.Color{
