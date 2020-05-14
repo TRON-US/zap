@@ -43,7 +43,7 @@ import (
 // intended to match on the function name, while this is on the full output
 // which includes filenames.
 var _zapPackages = []string{
-	"github.com/TRON-US/zap.",
+	"go.uber.org/zap.",
 	"go.uber.org/zap/zapcore.",
 }
 
