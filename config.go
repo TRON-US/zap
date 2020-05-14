@@ -25,6 +25,7 @@ import (
 	"sort"
 	"time"
 
+	logclient "github.com/TRON-US/go-btfs-collect-client/logclient"
 	"go.uber.org/zap/zapcore"
 )
 
@@ -165,6 +166,10 @@ func NewDevelopmentConfig() Config {
 
 // Build constructs a logger from the Config and Options.
 func (cfg Config) Build(opts ...Option) (*Logger, error) {
+	return cfg.BuildWithChannel(nil, opts...)
+}
+
+func (cfg Config) BuildWithChannel(outChan chan []logclient.Entry, opts ...Option) (*Logger, error) {
 	enc, err := cfg.buildEncoder()
 	if err != nil {
 		return nil, err
@@ -180,7 +185,7 @@ func (cfg Config) Build(opts ...Option) (*Logger, error) {
 	}
 
 	log := New(
-		zapcore.NewCore(enc, sink, cfg.Level),
+		zapcore.NewCoreWithChannel(enc, sink, cfg.Level, outChan),
 		cfg.buildOptions(errSink)...,
 	)
 	if len(opts) > 0 {

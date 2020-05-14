@@ -3,6 +3,7 @@ module go.uber.org/zap
 go 1.13
 
 require (
+	github.com/TRON-US/go-btfs-collect-client v0.0.1
 	github.com/pkg/errors v0.8.1
 	github.com/stretchr/testify v1.4.0
 	go.uber.org/atomic v1.6.0

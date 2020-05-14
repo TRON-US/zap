@@ -214,6 +214,9 @@ func (ce *CheckedEntry) Write(fields ...Field) {
 	var err error
 	for i := range ce.cores {
 		err = multierr.Append(err, ce.cores[i].Write(ce.Entry, fields))
+		if ce.cores[i].WithChannel() {
+			err = multierr.Append(err, ce.cores[i].WriteToChannel(ce.Entry, fields))
+		}
 	}
 	if ce.ErrorOutput != nil {
 		if err != nil {

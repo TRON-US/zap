@@ -20,6 +20,10 @@
 
 package zapcore
 
+import (
+	logclient "github.com/TRON-US/go-btfs-collect-client/logclient"
+)
+
 // Core is a minimal, fast logger interface. It's designed for library authors
 // to wrap in a more user-friendly API.
 type Core interface {
@@ -40,8 +44,12 @@ type Core interface {
 	// If called, Write should always log the Entry and Fields; it should not
 	// replicate the logic of Check.
 	Write(Entry, []Field) error
+	// Write the same way as Write() but to logclient channel
+	WriteToChannel(Entry, []Field) error
 	// Sync flushes buffered logs (if any).
 	Sync() error
+	// WithChannel returns if the channel exists in the Core object.
+	WithChannel() bool
 }
 
 type nopCore struct{}
@@ -52,7 +60,9 @@ func (nopCore) Enabled(Level) bool                            { return false }
 func (n nopCore) With([]Field) Core                           { return n }
 func (nopCore) Check(_ Entry, ce *CheckedEntry) *CheckedEntry { return ce }
 func (nopCore) Write(Entry, []Field) error                    { return nil }
+func (nopCore) WriteToChannel(Entry, []Field) error           { return nil }
 func (nopCore) Sync() error                                   { return nil }
+func (nopCore) WithChannel() bool                             { return false }
 
 // NewCore creates a Core that writes logs to a WriteSyncer.
 func NewCore(enc Encoder, ws WriteSyncer, enab LevelEnabler) Core {
@@ -63,10 +73,20 @@ func NewCore(enc Encoder, ws WriteSyncer, enab LevelEnabler) Core {
 	}
 }
 
+func NewCoreWithChannel(enc Encoder, ws WriteSyncer, enab LevelEnabler, oChan chan []logclient.Entry) Core {
+	return &ioCore{
+		LevelEnabler: enab,
+		enc:          enc,
+		out:          ws,
+		outChan:      oChan,
+	}
+}
+
 type ioCore struct {
 	LevelEnabler
-	enc Encoder
-	out WriteSyncer
+	enc     Encoder
+	out     WriteSyncer
+	outChan chan []logclient.Entry
 }
 
 func (c *ioCore) With(fields []Field) Core {
@@ -100,6 +120,22 @@ func (c *ioCore) Write(ent Entry, fields []Field) error {
 	return nil
 }
 
+func (c *ioCore) WriteToChannel(ent Entry, fields []Field) error {
+	buf, err := c.enc.EncodeEntry(ent, fields)
+	if err != nil {
+		return err
+	}
+	var lineEntries []logclient.Entry
+	lineEntries = append(lineEntries, logclient.LineEntry{Text: buf.String()})
+	c.outChan <- lineEntries
+	buf.Free()
+	return nil
+}
+
+func (c *ioCore) WithChannel() bool {
+	return c.outChan != nil
+}
+
 func (c *ioCore) Sync() error {
 	return c.out.Sync()
 }
@@ -109,5 +145,6 @@ func (c *ioCore) clone() *ioCore {
 		LevelEnabler: c.LevelEnabler,
 		enc:          c.enc.Clone(),
 		out:          c.out,
+		outChan:      c.outChan,
 	}
 }

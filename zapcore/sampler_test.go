@@ -147,9 +147,11 @@ func (c *countingCore) Write(Entry, []Field) error {
 	return nil
 }
 
-func (c *countingCore) With([]Field) Core { return c }
-func (*countingCore) Enabled(Level) bool  { return true }
-func (*countingCore) Sync() error         { return nil }
+func (c *countingCore) With([]Field) Core                 { return c }
+func (*countingCore) Enabled(Level) bool                  { return true }
+func (*countingCore) Sync() error                         { return nil }
+func (*countingCore) WriteToChannel(Entry, []Field) error { return nil }
+func (*countingCore) WithChannel() bool                   { return false }
 
 func TestSamplerConcurrent(t *testing.T) {
 	const (
